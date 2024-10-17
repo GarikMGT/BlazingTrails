@@ -21,7 +21,7 @@
     }
 
     protected override bool TryParseValueFromString(
-        string value,
+        string? value,
         out List<TrailDto.WaypointDto> result,
         out string validationErrorMessage)
     {
@@ -36,7 +36,7 @@
 
     private void DeleteWaypoint(LatLong waypoint)
     {
-        if (waypoint is null || waypoints.Count == 0)
+        if (waypoints.Count == 0)
             return;
 
         waypoints.RemoveAt(waypoints.Count - 1);
