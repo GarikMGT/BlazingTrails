@@ -13,7 +13,7 @@ public class AddTrailEndpoint(BlazingTrailsContext database) : EndpointBaseAsync
 {
     private readonly BlazingTrailsContext database = database;
 
-    //[Authorize]
+    [Authorize]
     [HttpPost(AddTrailRequest.RouteTemplate)]
     public override async Task<ActionResult<int>> HandleAsync(AddTrailRequest request, CancellationToken cancellationToken = default)
     {

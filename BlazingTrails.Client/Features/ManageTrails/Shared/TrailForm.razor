@@ -96,9 +96,6 @@
 
     protected override void OnParametersSet()
     {
-        editContext = new EditContext(trail);
-        editContext.SetFieldCssClassProvider(new BootstrapCssClassProvider());
-
         if (Trail != null)
         {
             trail.Id = Trail.Id;
@@ -112,11 +109,16 @@
 
             trail.Waypoints.Clear();
             trail.Waypoints.AddRange(Trail.Waypoints.Select(wp => new TrailDto.WaypointDto(wp.Latitude, wp.Longitude)));
+            Console.WriteLine("TrailForm-OnParamsSet -> Trail taken from Parameter");
         }
         else
         {
-            trail = AppState.NewTrailState.GetTrail();        
+            trail = AppState.NewTrailState.GetTrail();
+            Console.WriteLine("TrailForm-OnParamsSet -> Trail taken from AppState");
         }
+
+        editContext = new EditContext(trail);
+        editContext.SetFieldCssClassProvider(new BootstrapCssClassProvider());
     }
 
     public void ResetForm()
@@ -126,11 +128,14 @@
         editContext = new EditContext(trail);
         editContext.SetFieldCssClassProvider(new BootstrapCssClassProvider());
         trailImage = null;
+        Console.WriteLine("TrailForm -> Reset Form");
     }
 
     private async Task SubmitForm()
     {
+        Console.WriteLine("TrailForm->Submit start");
         await OnSubmit(trail, trailImage!);
+        Console.WriteLine("TrailForm->Submit end");
     }
 
     private void LoadTrailImage(InputFileChangeEventArgs e)
